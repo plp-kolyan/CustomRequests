@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "garant_success_requests"
-version = "0.0.3"
+version = "0.0.4"
 authors = [
   { name="plp-kolyan", email="plp-kolyan@mail.ru" },
 ]
@@ -20,5 +20,4 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Homepage" = "https://github.com/plp-kolyan/CustomRequests.git"
