@@ -1,4 +1,4 @@
-/CustomRequests/src/garant_success_requests.egg-info/
-/CustomRequests/dist/
+/src/garant_success_requests.egg-info/
+/dist/
 /venv/
 .idea
