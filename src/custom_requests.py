@@ -15,7 +15,7 @@ def return_test_response(json_data: dict, status_code: int = 200):
     return the_response
 
 
-class ResponseGarant:
+class RequestsGarant:
     """Кастомная библиотека для запросов"""
 
     def __init__(self):
@@ -80,6 +80,10 @@ class ResponseGarant:
             self.rezult = self.response
             return self.response
 
+    def get_obj_rezult(self):
+        self.get_rezult()
+        return self
+
     def return_test_response(self):
         self.define_json_response_test()
         return return_test_response(self.json_response_test)
@@ -104,7 +108,7 @@ class ResponseGarant:
         return requests.request(**self.args_request)
 
 
-class ResponseGarantSession(ResponseGarant):
+class RequestsGarantSession(RequestsGarant):
     def __init__(self, session):
         super().__init__()
         self.session = session
@@ -112,7 +116,7 @@ class ResponseGarantSession(ResponseGarant):
     def get_response_production(self):
         return self.session.request(**self.args_request)
 
-class ResponseGarantTest(ResponseGarant):
+class RequestsGarantTest(RequestsGarant):
     def __init__(self):
         super().__init__()
 
@@ -125,7 +129,7 @@ class ResponseGarantTest(ResponseGarant):
         return super().get_response_functions()
 
 
-class ResponseGarantTestBaseUrl(ResponseGarantTest):
+class RequestsGarantTestBaseUrl(RequestsGarantTest):
     def __init__(self):
         super().__init__()
 
@@ -143,7 +147,7 @@ def assign_url_endpoint(obj_cuctom_request):
         obj_cuctom_request.url = f"{obj_cuctom_request.url}{obj_cuctom_request.endpoint}"
 
 
-class ResponseGarantTestEndpoint(ResponseGarantTest):
+class RequestsGarantTestEndpoint(RequestsGarantTest):
     def __init__(self):
         super().__init__()
 
@@ -154,7 +158,7 @@ class ResponseGarantTestEndpoint(ResponseGarantTest):
         self.url = f"{self.base_url}{self.endpoint}"
 
 
-class ResponseGarantTestHeaders(ResponseGarantTest):
+class RequestsGarantTestHeaders(RequestsGarantTest):
     def __init__(self):
         super().__init__()
 
@@ -165,5 +169,5 @@ class ResponseGarantTestHeaders(ResponseGarantTest):
         self.headers.update(self.dict_key)
 
 
-class ResponseGarantTestJson(ResponseGarantTest):
+class RequestsGarantTestJson(RequestsGarantTest):
     pass
