@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "garant_success_requests"
-version = "0.0.7"
+name = "requestsgarant"
+version = "0.0.9"
 authors = [
   { name="plp-kolyan", email="plp-kolyan@mail.ru" },
 ]
@@ -18,6 +18,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
 
 [project.urls]
 "Homepage" = "https://github.com/plp-kolyan/CustomRequests.git"
