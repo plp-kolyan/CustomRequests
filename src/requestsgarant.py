@@ -56,6 +56,14 @@ class RequestsGarant:
     def rezult_function(self):
         pass
 
+    def set_null_attr(self):
+        # обнуление атрибутов
+        for attr in [attr for attr in self.__dict__.keys()]:
+            args = (self, attr)
+            if hasattr(*args):
+                delattr(*args)
+        self.__init__()
+
     def get_rezult(self):
         self.response = self.get_guarantee_response()
         if type(self.response) is type(requests.models.Response()):
