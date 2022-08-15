@@ -56,13 +56,13 @@ class RequestsGarant:
     def rezult_function(self):
         pass
 
-    def set_null_attr(self):
+    def set_null_attr(self, *args_init):
         # обнуление атрибутов
         for attr in [attr for attr in self.__dict__.keys()]:
             args = (self, attr)
             if hasattr(*args):
                 delattr(*args)
-        self.__init__()
+        self.__init__(*args_init)
 
     def get_rezult(self):
         self.response = self.get_guarantee_response()
