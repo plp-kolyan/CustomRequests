@@ -72,7 +72,7 @@ class TestTestCase(TestCase):
         dict(status_code=400, content={'key': 'hello'}),
         dict(status_code=200, content='ghjfmtl'),
         dict(status_code=200),
-        dict(err_cls=ConnectionError),
+        # dict(err_cls=ConnectionError),
         dict(err_cls=HTTPError)
 
     ]
