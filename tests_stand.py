@@ -1,9 +1,19 @@
+import time
 from unittest import TestCase
 import json
 from requests.models import Response
 from requests import ConnectionError, HTTPError, get
 from src.requestsgarant import RequestsGarant
+from loguru import logger
 
+
+def check_time(func):
+    def wrapper(*args, **kwargs):
+        start = time.monotonic()
+        func(*args, **kwargs)
+        return logger.info(time.monotonic() - start)
+
+    return wrapper
 
 def get_requestsgarant(args):
     g = Get(**args)
@@ -31,11 +41,12 @@ class Get:
     def get_response(self):
         response = Response()
         response.status_code = self.status_code
-        if self.content is not None:
-            try:
-                response._content = json.dumps(self.content).encode('utf-8')
-            except Exception:
-                response._content = self.content.encode('utf-8')
+        if isinstance(self.content, dict):
+            response._content = json.dumps(self.content).encode('utf-8')
+        elif self.content is not None:
+            # response._content = self.content.encode('utf-8')
+            response._content = self.content
+
         return response
 
     def get_trace(self):
@@ -50,6 +61,9 @@ class Get:
 
 class TestTestCase(TestCase):
     args_list = [
+        # ломанный json из разных кодировок
+        # тест по времени
+        # unix
 
         dict(status_code=200, content={'key': 'Привет мир'}),
         dict(status_code=400, content={'key': 'Привет мир'}),
@@ -98,3 +112,36 @@ class TestTestCase(TestCase):
 
         # dic = json.loads(bytes_string)
         # print(dic)
+
+    def test_1(self):
+        with open('response_1645504777256.json', 'rb') as file:
+            resp = Get(status_code=200, content=file.read()).get_response()
+            print(resp.content)
+
+    def test_2(self):
+        # invalid bullshit
+        content = b'{"title": "Homecredit Bank: \xd0\x9a\xd0\xb0\xd1\x80\xd1\x82\xd0\xb0 \xd1\x80\xd0\xb0\xd1\x81\xd1\x81\xd1\x80\xd0\xbe\xd1\x87\xd0\xba\xd0\xb8 \xd0\xa1\xd0\xb2\xd0\xbe\xd0\xb1\xd0\xbe\xd0\xb4\xd0\xb0 (\xd0\xbd\xd0\xb5 \xd0\xb0\xd0\xba\xd1\x82\xd1\x83\xd0\xb0\xd0\xbb\xd1\x8c\xd0\xbd\xd0\xbe)"}'
+        dec_content = content.decode()
+        print(f'пишем в лог {dec_content}')
+        dict_content = json.loads(dec_content)
+        print(type(dict_content))
+
+    def test_3(self):
+        R = '₽'.lower()
+        print(R.encode('utf-16'))
+
+
+    def test_4(self):
+
+        @check_time
+        def f():
+            start = time.monotonic()
+            'fff'.lower()
+            for i in range(2000000000000000):
+
+                print(f'{len(str(i))}')
+
+        f()
+
+
+
