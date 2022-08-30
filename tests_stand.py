@@ -96,7 +96,7 @@ class TestTestCase(TestCase):
                 print(json.loads(line))
 
     def test_0(self):
-        string = 'hello'
+        string = 'привет мир'
         bytes_string = string.encode('utf-8')
         print(bytes_string)
         print(bytes_string.decode('utf-8'))
