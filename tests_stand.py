@@ -59,6 +59,7 @@ class Get:
             return self.get_trace
 
 
+
 class TestTestCase(TestCase):
     args_list = [
         # ломанный json из разных кодировок
