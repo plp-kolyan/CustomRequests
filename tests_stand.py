@@ -66,9 +66,7 @@ class Get:
 
 class TestTestCase(TestCase):
     args_list = [
-        # ломанный json из разных кодировок
-        # тест по времени
-        # unix
+
 
         dict(status_code=200, content={'key': 'hello'}),
         dict(status_code=400, content={'key': 'hello'}),
