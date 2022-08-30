@@ -19,5 +19,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Change codeck
+        run: chcp 1252
       - name: Run FirstStep test
         run: python -m unittest tests_stand.TestTestCase
