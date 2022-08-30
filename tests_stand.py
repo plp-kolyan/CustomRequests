@@ -1,3 +1,6 @@
+# coding : utf-8
+# PEP-8
+
 import time
 from unittest import TestCase
 import json
