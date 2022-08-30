@@ -131,17 +131,5 @@ class TestTestCase(TestCase):
         print(R.encode('utf-16'))
 
 
-    def test_4(self):
-
-        @check_time
-        def f():
-            start = time.monotonic()
-            'fff'.lower()
-            for i in range(2000000000000000):
-
-                print(f'{len(str(i))}')
-
-        f()
-
 
 
