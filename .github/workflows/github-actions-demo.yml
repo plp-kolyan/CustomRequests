@@ -38,10 +38,13 @@ jobs:
         include:
           - os: ubuntu-latest
             path: ~/.cache/pip
+            venv-path: source venv/bin/activate
           - os: macos-latest
             path: ~/Library/Caches/pip
+            venv-path: source venv/bin/activate
           - os: windows-latest
             path: ~\AppData\Local\pip\Cache
+            venv-path: venv\Scripts\activate.bat
         python-version: [ 3.9 ]
 
     runs-on: ${{ matrix.os }}
