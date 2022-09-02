@@ -11,7 +11,10 @@ env:
 
 jobs:
   create-virtualenv:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
 
@@ -24,7 +27,7 @@ jobs:
         id: cache-virtualenv
 
       - uses: syphar/restore-pip-download-cache@v1
-#        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
 
       - run: pip install -r requirements.txt
 #        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
