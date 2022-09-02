@@ -18,7 +18,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.9
 
       - uses: syphar/restore-virtualenv@v1
         id: cache-virtualenv
@@ -45,7 +45,7 @@ jobs:
           - os: windows-latest
             path: ~\AppData\Local\pip\Cache
             venv-path: venv\Scripts\activate.bat
-        python-version: [ 3.9 ]
+        python-version: [3.9]
 
     runs-on: ${{ matrix.os }}
 
