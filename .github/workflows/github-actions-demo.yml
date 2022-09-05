@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 
 env:
+  python-version: "3.7"
   PYTHONIOENCODING: UTF-8
 
 jobs:
@@ -24,8 +25,6 @@ jobs:
           - os: windows-latest
             path: ~\AppData\Local\pip\Cache
             venv-path: venv\Scripts\activate.bat
-        python-version: [3.9]
-
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -34,7 +33,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ env.python-version }}
 
       - uses: syphar/restore-virtualenv@v1
         id: cache-virtualenv
@@ -49,3 +48,25 @@ jobs:
 
       - name: Run FirstStep test
         run: python -m unittest tests_stand.TestTestCase
+
+  upload_pypi_package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        - name: Set up Python
+          uses: actions/setup-python@v4
+          with:
+            python-version: ${{ env.python-version }}
+        - name: Install deps
+          run: |
+            python -m pip install --upgrade pip
+            pip install build
+        - name: Build package
+          run: python -m build
+        - name: Publish package
+          uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+          with:
+            user: __token__
+            password: ${{ secrets.PYPI_API_TOKEN }}
+

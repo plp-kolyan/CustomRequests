@@ -61,5 +61,36 @@ class TestTestCase(TestCase):
         endqueue.join()
 
 
+class UpdateTomlTestCase(TestCase):
+    def test_open(self):
+        with open('pyproject.toml', 'r') as file:
+            print(file.read())
 
+    def up_version(self, version_list, index=None):
+        if index is None:
+            last_index = len(version_list) - 1
+        else:
+            last_index = index
+        version_list[last_index] = str(int(version_list[last_index]) + 1)
+
+        if last_index == 0:
+            return '.'.join(version_list)
+        else:
+            if last_chr := int(version_list[last_index]) > 9:
+                version_list[last_index] = str(last_chr // 10)
+                last_index -= 1
+                return self.up_version(version_list, last_index)
+            return '.'.join(version_list)
+
+    def test_open_toml(self):
+        import toml
+        data = {}
+
+        with open("pyproject.toml", "r") as file:
+            data = toml.load(file)
+            version_list = data['project']['version'].split('.')
+            data['project']['version'] = self.up_version(version_list)
+
+        with open("pyproject.toml", "w") as file:
+            toml.dump(data, file)
 
