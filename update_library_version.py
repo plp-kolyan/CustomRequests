@@ -27,7 +27,7 @@ def update_version(path_to_file="pyproject.toml"):
         version_list = data['project']['version'].split('.')
         data['project']['version'] = up_version(version_list)
     with open(path_to_file, "w") as file:
-        toml.dump(data, file)
+        toml.dump(data, file).encode('utf-8')
 
 
 if __name__ == '__main__':
