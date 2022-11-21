@@ -1,14 +1,11 @@
-# coding : utf-8
-# PEP-8
-
 import time
 
 from unittest import TestCase
 import json
-from requests.models import Response
-from requests import ConnectionError, HTTPError, get
-from src.requestsgarant import RequestsGarant
 from loguru import logger
+from requests import ConnectionError, HTTPError, get
+from requests import Response
+from src.requestsgarant import RequestsGarant
 
 
 def check_time(func):
