@@ -101,7 +101,7 @@ class RequestsGarant:
 
     def get_response_functions(self):
         self.args_request = {attr: getattr(self, attr) for attr in
-                             ['method', 'params', 'url', 'proxies', 'data', 'json', 'headers', 'timeout', 'files']
+                             ['method', 'params', 'url', 'proxies', 'data', 'json', 'headers', 'timeout', 'files', 'verify']
                              if hasattr(self, attr) is True and getattr(self, attr) is not None
                              if getattr(self, 'method') == 'get' and attr != 'json'
                              or

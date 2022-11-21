@@ -14,7 +14,7 @@
 
 Минимальный пример:
     
-    from garant_success_requests.custom_requests import ResponseGarant
+    from requestsgarant import RequestsGarant
 
     class YandexRequest(ResponseGarant):
         def __init__(self):

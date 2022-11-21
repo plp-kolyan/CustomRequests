@@ -2,6 +2,7 @@
 # PEP-8
 
 import time
+
 from unittest import TestCase
 import json
 from requests.models import Response
@@ -117,3 +118,44 @@ class TestTestCase(TestCase):
     def test_3(self):
         R = '₽'.lower()
         print(R.encode('utf-16'))
+
+    def test_4(self):
+        import requests
+        import traceback
+
+        sucsess = False
+
+        try:
+            r = requests.post('https://httpbin.org/post', data={'key': 'value'})
+        except Exception:
+            rezult = traceback.format_exc()
+
+        else:
+            try:
+                response_json = r.json()
+            except:
+                response_json = None
+
+            if response_json is not None:
+                if 'form' in response_json:
+                    rezult = response_json['form']
+                    sucsess = True
+                else:
+                    rezult = response_json
+            else:
+                rezult = f'status_code: "{r.status_code}", text {r.text}'
+
+
+
+
+        print(rezult)
+        print(sucsess)
+
+    def test_5(self):
+        import requests
+
+        r = requests.post('https://httpbin.org/post', data={'key': 'value'})
+        print(r.json())
+
+    def test_6(self):
+
