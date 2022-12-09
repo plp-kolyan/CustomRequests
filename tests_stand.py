@@ -153,6 +153,3 @@ class TestTestCase(TestCase):
 
         r = requests.post('https://httpbin.org/post', data={'key': 'value'})
         print(r.json())
-
-    def test_6(self):
-
