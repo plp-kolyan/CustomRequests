@@ -46,10 +46,10 @@ class ParserHidemy(RequestsGarant):
 
 
 
-def start_parser_hidemi(params):
+def start_parser_hidemi(params, cls=ParserHidemy):
     for start in range(0, 17000, 64):
         params.update({'start': start})
-        obj = ParserHidemy(params).get_obj_rezult()
+        obj = cls(params).get_obj_rezult()
         print(f"start={start}, {obj.rezult}")
         if obj.finish:
             return start
