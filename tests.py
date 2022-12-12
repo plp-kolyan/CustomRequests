@@ -1,6 +1,6 @@
 import threading
 
-from src import requestsgarant
+from src.requestsgarant import *
 from unittest import TestCase
 
 
@@ -59,6 +59,8 @@ class TestTestCase(TestCase):
         threading.Thread(target=pp, daemon=True).start()
         startqueue.join()
         endqueue.join()
+
+
 
 
 class UpdateTomlTestCase(TestCase):
