@@ -1,2 +1,6 @@
 loguru==0.6.0
 requests
+setuptools>=57.0.0
+twine>=4.0.1
+build>=0.8.0
+toml>=0.10.2
