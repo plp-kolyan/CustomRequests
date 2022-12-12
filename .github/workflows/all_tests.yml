@@ -2,9 +2,8 @@ name: Code checks
 
 on:
   push:
-    branches: [ development ]
-  pull_request:
-    branches: [ development ]
+    branches: [ master ]
+
 
 env:
   python-version: "3.8"
