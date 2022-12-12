@@ -31,6 +31,19 @@ class TestTestCase(TestCase):
     def test(self):
         start_parser_hidemi({'type': 'h'})
 
+    def test_1(self):
+        with open(f'{os.path.abspath(os.curdir)}\\pages\\{"hidemy.name_64_proxy.html"}', 'rb') as file:
+
+            if (soup := BeautifulSoup(file.read(), 'lxml')) is not None:
+                if (table_soup := soup.find("div", class_="table_block")) is not None:
+                    tr_soup = table_soup.find_all('tr')
+                    if len(tr_soup) == 1:
+                        return f"Последняя таблица"
+                    elif len(tr_soup) > 1:
+
+                            for td_soup in tr_soup:
+                                print(td_soup)
+
 
 class ParserHidemyTestCase(TestCase):
     @staticmethod
@@ -45,6 +58,7 @@ class ParserHidemyTestCase(TestCase):
 
     def test_hidemy_name_64_proxy(self):
         ob = self.get_ob_parser_hidemy('hidemy.name_64_proxy.html')
+
         print(ob.do_status_code())
         print(ob.finish)
 

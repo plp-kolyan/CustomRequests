@@ -1,4 +1,4 @@
-from src.requestsgarant import RequestsGarant
+from requestsgarant import RequestsGarant
 from bs4 import BeautifulSoup
 import os
 import csv
