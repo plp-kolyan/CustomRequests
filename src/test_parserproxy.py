@@ -2,6 +2,7 @@ from unittest import TestCase
 from requests.models import Response
 import os
 from src.parserproxy import *
+import json
 
 def get_requestsgarant_ob(page_html, requestsgarant_ob):
     requestsgarant_ob.response = Response()
@@ -73,6 +74,35 @@ class ParserHidemyTestCase(TestCase):
         ob = ParserHidemy({'type': 'h'})
         ob.write_row = self.write_row
         print(ob.get_rezult())
+
+
+class HidemyApiTestCase(TestCase):
+    def setUp(self) -> None:
+        from dotenv import load_dotenv, dotenv_values
+
+        load_dotenv()
+
+        if 'PATH_TO_ENV' in dotenv_values(".env"):
+            load_dotenv(dotenv_path=os.environ.get('PATH_TO_ENV'))
+        else:
+            load_dotenv(dotenv_path='C:\\config_bank_rko\\.env')
+
+        self.code = os.environ.get('hidemy')
+
+    def test_0(self):
+
+        obj = HidemyApi({'out': 'js', 'code': self.code, 'type': 'h'})
+        obj.get_obj_rezult()
+        print(obj.response)
+        with open('HidemyApi.json', 'w', encoding='utf-8') as file:
+            file.write(json.dumps(obj.response_json))
+
+
+    def test_1(self):
+        with open('HidemyApi.json', 'r', encoding='utf-8') as file:
+            print(json.loads(file.read())[0])
+
+
 
 
 

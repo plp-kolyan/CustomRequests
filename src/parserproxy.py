@@ -24,7 +24,8 @@ class ParserHidemy(RequestsGarant):
                     self.finish = True
                     return f"Последняя таблица"
                 elif len(tr_soup) > 1:
-                    with open(f'{os.path.abspath(os.curdir)}/{self.__class__.__name__}.csv', 'a', encoding='utf-8') as file:
+                    with open(f'{os.path.abspath(os.curdir)}/{self.__class__.__name__}.csv', 'a',
+                              encoding='utf-8') as file:
                         writer = csv.writer(file)
                         for td_soup in tr_soup:
                             self.write_row(writer, td_soup)
@@ -35,15 +36,12 @@ class ParserHidemy(RequestsGarant):
             return f"table_block отсутствует {self.response.text}"
         return f"нет супа {self.response.text}"
 
-
     @staticmethod
     def write_row(writer, tr_soup):
         try:
             writer.writerow([tr_soup.text for tr_soup in tr_soup.find_all('td')])
         except Exception as e:
             print(e)
-
-
 
 
 def start_parser_hidemi(params, cls=ParserHidemy):
@@ -53,4 +51,13 @@ def start_parser_hidemi(params, cls=ParserHidemy):
         print(f"start={start}, {obj.rezult}")
         if obj.finish:
             return start
+
+
+class HidemyApi(RequestsGarant):
+    def __init__(self, params):
+        super().__init__()
+        self.params = params
+        self.url = f'http://hidemy.name/ru/api/proxylist.php'
+        self.method = 'get'
+
 
